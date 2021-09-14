@@ -19,6 +19,14 @@ export default {
   },
   methods: {
     clearNotification: notificationMethods.clear,
+    clearCookies() {
+      window.onbeforeunload = () => {
+        localStorage.removeItem("user");
+        this.$router.push({
+          path: "/login",
+        });
+      };
+    },
   },
   watch: {
     /**
@@ -31,7 +39,8 @@ export default {
     },
   },
   mounted() {
+    this.clearCookies();
     // document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
-  }
+  },
 };
 </script>
